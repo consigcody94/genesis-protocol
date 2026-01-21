@@ -1,0 +1,165 @@
+Initiating Future-Tech Scan of Genesis Chapter 1...
+
+Search Space: 1671 characters (Genesis 1)
+
+Scanning for 'ATOM' (אטום)...
+  -> None found.
+Scanning for 'DNA' (דנא)...
+  -> Found 19 hits.
+Scanning for 'CODE' (קוד)...
+  -> Found 14 hits.
+Scanning for 'COMPUTER' (מחשב)...
+  -> None found.
+Scanning for 'GOLEM' (גולם)...
+  -> None found.
+Scanning for 'WISDOM' (חכמה)...
+  -> None found.
+Scanning for 'NETWORK' (רשת)...
+  -> Found 49 hits.
+
+--- CLUSTER ANALYSIS (The 'Hidden Message') ---
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'CODE' found together!
+    DNA: Index 634, Skip -142
+    CODE: Index 623, Skip 64
+    Distance: 11 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'CODE' found together!
+    DNA: Index 634, Skip -93
+    CODE: Index 623, Skip 64
+    Distance: 11 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 848, Skip 76
+    NETWORK: Index 857, Skip 64
+    Distance: 9 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 464, Skip 77
+    NETWORK: Index 476, Skip 72
+    Distance: 12 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 751, Skip 173
+    NETWORK: Index 748, Skip 165
+    Distance: 3 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 751, Skip 173
+    NETWORK: Index 748, Skip -146
+    Distance: 3 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 848, Skip -171
+    NETWORK: Index 857, Skip 64
+    Distance: 9 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 1262, Skip -122
+    NETWORK: Index 1251, Skip -30
+    Distance: 11 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'DNA' and 'NETWORK' found together!
+    DNA: Index 1262, Skip -5
+    NETWORK: Index 1251, Skip -30
+    Distance: 11 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 254, Skip 3
+    NETWORK: Index 271, Skip 194
+    Distance: 17 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 810, Skip 19
+    NETWORK: Index 827, Skip 86
+    Distance: 17 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 810, Skip 19
+    NETWORK: Index 827, Skip -13
+    Distance: 17 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 337, Skip 60
+    NETWORK: Index 330, Skip 165
+    Distance: 7 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 623, Skip 64
+    NETWORK: Index 608, Skip -113
+    Distance: 15 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip 73
+    NETWORK: Index 330, Skip 165
+    Distance: 12 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip 73
+    NETWORK: Index 309, Skip 175
+    Distance: 9 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 254, Skip 190
+    NETWORK: Index 271, Skip 194
+    Distance: 17 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 892, Skip -129
+    NETWORK: Index 897, Skip -119
+    Distance: 5 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 892, Skip -129
+    NETWORK: Index 893, Skip -79
+    Distance: 1 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 892, Skip -129
+    NETWORK: Index 906, Skip -74
+    Distance: 14 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 892, Skip -129
+    NETWORK: Index 885, Skip -71
+    Distance: 7 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip -96
+    NETWORK: Index 330, Skip 165
+    Distance: 12 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip -96
+    NETWORK: Index 309, Skip 175
+    Distance: 9 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip -61
+    NETWORK: Index 330, Skip 165
+    Distance: 12 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 318, Skip -61
+    NETWORK: Index 309, Skip 175
+    Distance: 9 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 594, Skip -35
+    NETWORK: Index 595, Skip 32
+    Distance: 1 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 594, Skip -35
+    NETWORK: Index 587, Skip 89
+    Distance: 7 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 594, Skip -35
+    NETWORK: Index 608, Skip -113
+    Distance: 14 letters.
+------------------------------
+[!] POTENTIAL BREAKTHROUGH: 'CODE' and 'NETWORK' found together!
+    CODE: Index 254, Skip -13
+    NETWORK: Index 271, Skip 194
+    Distance: 17 letters.
+------------------------------

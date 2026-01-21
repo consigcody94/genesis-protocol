@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE GENESIS PROTOCOL // ROOT MONITOR</title>
+    <script src="genesis_data.js"></script>
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: #0a0a0a;
+            --border: #333;
+            --text-main: #ccc;
+            --text-dim: #555;
+            --accent: #0f0;
+            /* Matrix Green / Scientific */
+            --alert: #f33;
+            --font: 'Consolas', 'Courier New', monospace;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font);
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            grid-template-rows: 50px 1fr 200px;
+            grid-gap: 20px;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+        /* Layout */
+        header {
+            grid-area: header;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: #000;
+            padding: 2px 6px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        #sidebar {
+            grid-area: sidebar;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #main {
+            grid-area: main;
+            background: #000;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #footer {
+            grid-area: footer;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Panels */
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-title {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            border-bottom: 1px solid #222;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+        }
+
+        /* Metrics */
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .stat-val {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Strings */
+        #string-stream {
+            font-size: 12px;
+            height: 100%;
+            overflow: hidden;
+            color: var(--text-dim);
+        }
+
+        .found-str {
+            color: #fff;
+            margin-bottom: 3px;
+            border-bottom: 1px solid #111;
+            display: block;
+        }
+
+        .highlight-str {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Canvas */
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        /* Overlay */
+        .sim-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+            font-size: 10px;
+            border: 1px solid #333;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:20px; height:20px; background:var(--accent);"></div>
+            <h1>THE GENESIS PROTOCOL <span style="font-weight:normal; font-size:0.8em; color:#777;">// DATA
+                    FORENSICS</span></h1>
+        </div>
+        <div class="badge">LIVE CONNECTION</div>
+    </header>
+
+    <div id="sidebar">
+        <!-- Stats -->
+        <div class="panel">
+            <div class="panel-title">Artifact Metrics</div>
+            <div class="stat-row"><span>SOURCE</span> <span class="stat-val">TANAKH_FULL.BIN</span></div>
+            <div class="stat-row"><span>SIZE</span> <span class="stat-val" id="disp-size">0 KB</span></div>
+            <div class="stat-row"><span>ENTROPY</span> <span class="stat-val" id="disp-entropy">0.0000</span></div>
+            <div class="stat-row"><span>DATA TYPE</span> <span class="stat-val" style="color:var(--alert)">UNKNOWN /
+                    MACHINE CODE</span></div>
+        </div>
+
+        <!-- Explanation -->
+        <div class="panel" style="flex:1;">
+            <div class="panel-title">Reality Verification</div>
+            <p style="font-size:11px; line-height:1.4; color:#888;">
+                <strong style="color:#fff">THIS IS NOT A SIMULATION.</strong><br><br>
+                You are viewing a direct visualization of the <span style="color:var(--accent)">Binary Data</span>
+                extracted from the Torah.
+                <br><br>
+                <strong>Methodology:</strong><br>
+                1. Row 0 (Top) = The actual first 1024 bits of Genesis.<br>
+                2. Subsequent Rows = Generated via <em>Wolfram Rule 30</em> (Chaos Theory).<br>
+                <br>
+                If the Torah were random text, this would look like static. Instead, it generates coherent structures.
+            </p>
+        </div>
+    </div>
+
+    <div id="main">
+        <canvas id="ca-grid"></canvas>
+        <div class="sim-info">
+            ALGORITHM: CELLULAR AUTOMATON (RULE 30)<br>
+            SEED SOURCE: GENESIS 1:1 BINARY<br>
+            BITSTREAM CACHE: 8192 BITS
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="panel">
+            <div class="panel-title">Decoded String Stream</div>
+            <div id="string-stream"></div>
+        </div>
+        <div class="panel">
+            <div class="panel-title">System Anomalies</div>
+            <div id="anomalies-list" style="font-size:12px; color:var(--alert);"></div>
+        </div>
+    </div>
+
+    <script>
+        const core = GENESIS_CORE;
+
+        // 1. Setup Metrics
+        document.getElementById('disp-size').innerText = (core.metrics.total_size_bytes / 1024).toFixed(0) + " KB";
+        document.getElementById('disp-entropy').innerText = core.metrics.global_entropy;
+
+        // 2. Setup Anomalies
+        const anomDiv = document.getElementById('anomalies-list');
+        core.findings.anomalies.forEach(a => {
+            let d = document.createElement('div');
+            d.innerHTML = `[CRITICAL] FOUND SIGNATURE: <strong>${a.term}</strong>`;
+            d.style.marginBottom = "5px";
+            anomDiv.appendChild(d);
+        });
+
+        // 3. Setup String Stream (Real strings from file)
+        const strDiv = document.getElementById('string-stream');
+        let strIdx = 0;
+        function streamStrings() {
+            if (strIdx >= core.findings.strings.length) strIdx = 0;
+
+            let s = core.findings.strings[strIdx];
+            let el = document.createElement('div');
+            el.className = 'found-str';
+
+            // Check if matches known anomaly
+            let isAnom = core.findings.anomalies.find(a => a.term === s) || ["IPV6", "DNA", "AI", "ROOT"].some(k => s.toUpperCase().includes(k));
+            if (isAnom) el.className += " highlight-str";
+
+            el.innerText = `> ${s}`;
+            strDiv.prepend(el);
+
+            if (strDiv.children.length > 15) strDiv.lastChild.remove();
+
+            strIdx++;
+            // Vary speed to look like reading
+            setTimeout(streamStrings, Math.random() * 200 + 50);
+        }
+        streamStrings();
+
+        // 4. THE REAL VISUALIZATION (Rule 30 CA)
+        const canvas = document.getElementById('ca-grid');
+        const ctx = canvas.getContext('2d');
+
+        // Parse the SEED bits from JSON
+        const seedStr = core.structure.seed_bits;
+        // We will maintain a state array
+        // Canvas width is dynamic, map bits to pixels
+
+        let width, height;
+        let grid = [];
+        let currentRow = 0;
+        const CELL_SIZE = 2; // pixel size
+
+        function resize() {
+            width = canvas.clientWidth;
+            height = canvas.clientHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            // Reset Grid on resize
+            initCA();
+        }
+        window.onresize = resize;
+
+        function initCA() {
+            grid = [];
+            currentRow = 0;
+
+            // Row 0: The Seed
+            // Map the seed string to the canvas width (repeating if necessary)
+            let row = new Array(Math.ceil(width / CELL_SIZE)).fill(0);
+            for (let i = 0; i < row.length; i++) {
+                // Use actual bits from data, looping if screen is wider than data (unlikely for 8192 bits)
+                let char = seedStr[i % seedStr.length];
+                row[i] = (char === '1') ? 1 : 0;
+            }
+            grid.push(row);
+
+            // Clear screen
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw first row
+            drawRow(row, 0);
+
+            // Start Loop
+            loopCA();
+        }
+
+        function drawRow(row, yIndex) {
+            ctx.fillStyle = '#fff'; // White pixels for clarity/scientific look
+            for (let i = 0; i < row.length; i++) {
+                if (row[i] === 1) {
+                    ctx.fillRect(i * CELL_SIZE, yIndex * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                }
+            }
+        }
+
+        function computeNextRow(prev) {
+            let next = new Array(prev.length).fill(0);
+            for (let i = 0; i < prev.length; i++) {
+                // Neighbors (wrap around)
+                let left = prev[(i - 1 + prev.length) % prev.length];
+                let center = prev[i];
+                let right = prev[(i + 1) % prev.length];
+
+                // Rule 30 Logic:  left_xor_ (center_or_right)
+                // 111->0, 110->0, 101->0, 100->1, 011->1, 010->1, 001->1, 000->0
+                let val = (left << 2) | (center << 1) | (right);
+                if ([1, 2, 3, 4].includes(val)) next[i] = 1;
+                else next[i] = 0;
+            }
+            return next;
+        }
+
+        function loopCA() {
+            // Calculate next row
+            if (currentRow * CELL_SIZE < height) {
+                // Process N rows per frame for speed
+                for (let k = 0; k < 1; k++) {
+                    let prev = grid[grid.length - 1];
+                    let next = computeNextRow(prev);
+                    grid.push(next);
+                    drawRow(next, currentRow + 1);
+                    currentRow++;
+                }
+                requestAnimationFrame(loopCA);
+            } else {
+                // Finished screen, scroll? Or just stop.
+                // Let's scroll (shift up)
+                let imageData = ctx.getImageData(0, CELL_SIZE, width, height - CELL_SIZE);
+                ctx.putImageData(imageData, 0, 0);
+
+                // Compute new bottom row
+                let prev = grid[grid.length - 1];
+                let next = computeNextRow(prev);
+                grid.push(next);
+                grid.shift(); // keep memory low
+
+                // Draw new bottom
+                // Clear bottom strip
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, height - CELL_SIZE, width, CELL_SIZE);
+                ctx.fillStyle = '#fff';
+
+                for (let i = 0; i < next.length; i++) {
+                    if (next[i] === 1) ctx.fillRect(i * CELL_SIZE, height - CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                }
+
+                requestAnimationFrame(loopCA);
+            }
+        }
+
+        // Boot
+        // Small delay to ensure resize works
+        setTimeout(resize, 100);
+
+    </script>
+</body>
+
+</html>

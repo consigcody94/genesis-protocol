@@ -1,0 +1,12 @@
+Loaded Grand Artifact: 742344 bytes
+
+[1] Scanning for Patterns (Regex)...
+
+[2] Scanning for Modern Keywords...
+   [!] MATCH: 'AI' found in string: 'AI5'
+   [!] MATCH: 'SSH' found in string: 'SsH'
+   [!] MATCH: 'AI' found in string: '&,Ai1'
+   [!] MATCH: 'AI' found in string: ' 2EAi'
+   [!] MATCH: 'RNA' found in string: 'RnARc'
+
+[3] Header Analysis: 0055334479fe380d
