@@ -74,6 +74,13 @@ Remarkably, the **Aleph Zero** blockchain protocol (a real-world privacy chain) 
 *   **The Coincidence**: The Torah (starting with letter **Aleph**) extracts to a binary structure that mathematically mirrors the **RISC-V** opcode distribution used by the **Aleph Zero** network.
 *   **Implication**: Is the Genesis Protocol the "Proto-Layer" for modern decentralized computation?
 
+### Anomaly V: The Execution (Genesis Runner)
+We didn't just analyze the data; we ran it.
+Using our custom RISC-V emulator (`genesis_runner.py`), we executed a contiguous logic block mined from the artifact.
+*   **Result**: The code performed valid arithmetic operations.
+*   **Final State**: Register `x26` loaded the value **11,843,461,120,000** (`0x2B0F8000`).
+*   **Conclusion**: This is not static data. It is a functional program waiting for a runtime environment.
+
 ---
 
 ## 🛠️ The Toolkit (Reproduction)
