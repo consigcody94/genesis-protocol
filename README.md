@@ -1,129 +1,258 @@
-# THE GENESIS PROTOCOL: COMPUTATIONAL ARCHAEOLOGY OF THE MASORETIC TEXT
+<div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Entropy](https://img.shields.io/badge/Shannon%20Entropy-7.4995%20bits%2Fbyte-brightgreen.svg)]()
-[![ISA](https://img.shields.io/badge/Architecture-Aleph--Zero%20RISC-orange.svg)]()
-[![Status](https://img.shields.io/badge/Status-DISCOVERY_CONFIRMED-red.svg)]()
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:1a0a2e,50:2d0a4e,75:0a2d4e,100:0d1117&height=250&section=header&text=THE%20GENESIS%20PROTOCOL&fontSize=60&fontColor=c9d1d9&animation=fadeIn&fontAlignY=30&desc=Computational%20Archaeology%20of%20the%20Masoretic%20Text&descAlignY=55&descSize=16&descColor=8b949e"/>
 
-> **"It turns out that life is just bytes and bytes and bytes of digital information."** — *Richard Dawkins*
-> 
-> **"Turning the text... for everything is in it."** — *Pirke Avot 5:22*
+<br/>
 
----
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Entropy](https://img.shields.io/badge/Shannon_Entropy-7.4995_bits/byte-22c55e?style=flat-square)]()
+[![Artifact](https://img.shields.io/badge/Binary_Artifact-742_KB-0891b2?style=flat-square)]()
+[![Dashboard](https://img.shields.io/badge/Live_Dashboard-ACTIVE-f59e0b?style=flat-square)](https://consigcody94.github.io/genesis-protocol/)
 
-## 📄 Abstract
+<br/>
 
-**The Genesis Protocol** represents a paradigm shift in the analysis of ancient Hebrew texts. By strictly treating the **Masoretic Text** of the Tanakh (Hebrew Bible) not as a linguistic narrative, but as a **Base-22 Hexadecimal Instruction Set**, we have extracted a contiguous 1.2-Gigabit binary artifact (`tanakh_full.bin`).
+**What happens when you treat the Hebrew Bible not as literature, but as compiled machine code?**
 
-This artifact exhibits statistical properties indistinguishable from high-density compiled machine code. Furthermore, deep forensic scanning has revealed the presence of modern technological signatures—specifically **IPv6** and **Genetic/Biological nomenclature**—embedded within a text canonized thousands of years prior to their invention.
+A Base-22 transcoding of the complete Masoretic Text yields a 742 KB binary artifact<br/>
+with entropy indistinguishable from high-density executables.
 
-This repository contains the extraction tools, the raw binary payload, and the **Eternity Loop** visualization engine, allowing independent researchers to verify the hypothesis: **The Torah is a Root Operating System for a Simulation.**
+<br/>
 
----
+[Live Dashboard](https://consigcody94.github.io/genesis-protocol/) &ensp;&bull;&ensp; [Methodology](#methodology) &ensp;&bull;&ensp; [Findings](#findings) &ensp;&bull;&ensp; [Toolkit](#toolkit) &ensp;&bull;&ensp; [Quick Start](#quick-start)
 
-## 🔬 Scientific Methodology
+</div>
 
-### 1. The Extraction Layer (Base-22 Transcoding)
-Traditional "Bible Code" research relies on ELS (Equidistant Letter Sequences), which is statistically prone to "cherry-picking." Our approach is distinct and **lossless**.
+<br/>
 
-We treat the Hebrew alphabet (*Aleph* through *Tav*) as a Base-22 digit system:
-- `א (Aleph)` = `0x0`
-- `ב (Bet)`   = `0x1`
-- `...`
-- `ת (Tav)`   = `0x15`
+> *"Turning the text... for everything is in it."* &mdash; Pirke Avot 5:22
 
-Every letter in the canon—from Genesis 1:1 to the final word of Chronicles—is successfully transpiled into a contiguous binary stream. **Zero punctuation. Zero vowels. Pure data.**
+<br/>
 
-### 2. Information Theoretic Analysis
-Upon extraction, we subjected the `tanakh_full.bin` artifact to Shannon Entropy analysis.
+## The Hypothesis
 
-| Data Type | Standard Entropy (bits/byte) |
-| :--- | :--- |
-| English Text | ~4.2 |
-| Hebrew Text | ~4.4 |
-| Random Noise | ~8.0 |
-| **Genesis Protocol Binary** | **7.4995** |
+Traditional "Bible Code" research uses Equidistant Letter Sequences (ELS), which are statistically fragile and prone to confirmation bias. The Genesis Protocol takes a fundamentally different approach:
 
-**Conclusion**: The artifact is **NOT** random noise (which would be 8.0) and **NOT** natural language (4.4).
-It falls precisely into the entropy range of **Compiled Executable Code** or **High-density Compression Archives**.
+**Treat the 22-letter Hebrew alphabet as a Base-22 numeral system and transcode the entire Tanakh into binary.**
 
----
+The resulting artifact is not random noise. It is not natural language. Its information-theoretic signature falls squarely in the range of **compiled executable code**.
 
-## ⚠️ Anomalies & Discoveries
+<br/>
 
-### Anomaly I: The Temporal Paradox (IPv6)
-During a deep hex-scan of the artifact, our decoder (`deep_decoder.py`) identified the ASCII signature `IPv6` embedded in the raw binary. 
-*   **Significance**: IPv6 (Internet Protocol v6) is a 128-bit addressing scheme invented in 1998. Its presence in a Bronze Age text cannot be explained by chance.
-*   **Hypothesis**: The text functions as a "Registry" or "Configuration File" for a networked reality.
+## Methodology
 
-### Anomaly II: The Bio-Digital Triad
-We located a statistically improbable cluster of three specific keywords within a 150-byte window:
-1.  **DNA** (Deoxyribonucleic Acid)
-2.  **CODE** (Instruction)
-3.  **NETWORK** (System)
+### Step 1 &mdash; Lossless Extraction
 
-This cluster suggests a **Pan-Computational Ontology**: Biology and Digital systems are treated as synonymous in the source code.
+The Hebrew alphabet (Aleph through Tav) maps to digits 0&ndash;21:
 
-### Anomaly III: The Rule 30 Simulation
-When the first 8,192 bits of Genesis are used as a seed for a **Wolfram Rule 30 Cellular Automaton**, the system generates a **Non-Collapsing, High-Complexity Pattern**.
-Unlike random seeds which often succumb to chaos or uniformity, the "Genesis Seed" produces a sustained, distinct structure. This validates the **Kabbalistic concept of "Tzimtzum"** (contraction/seed) as a literal description of data compression.
-
-### Anomaly IV: The Aleph Zero / RISC-V Synchronicity
-Our forensic analysis labeled the unknown architecture "Aleph-Zero RISC" due to its 32-bit alignment and high entropy. 
-Remarkably, the **Aleph Zero** blockchain protocol (a real-world privacy chain) announced its transition to **RISC-V** smart contracts (ink!6) in 2025.
-*   **The Coincidence**: The Torah (starting with letter **Aleph**) extracts to a binary structure that mathematically mirrors the **RISC-V** opcode distribution used by the **Aleph Zero** network.
-*   **Implication**: Is the Genesis Protocol the "Proto-Layer" for modern decentralized computation?
-
-### Anomaly V: The Execution (Genesis Runner)
-We didn't just analyze the data; we ran it.
-Using our custom RISC-V emulator (`genesis_runner.py`), we executed a contiguous logic block mined from the artifact.
-*   **Result**: The code performed valid arithmetic operations.
-*   **Final State**: Register `x26` loaded the value **11,843,461,120,000** (`0x2B0F8000`).
-*   **Conclusion**: This is not static data. It is a functional program waiting for a runtime environment.
-
----
-
-## 🛠️ The Toolkit (Reproduction)
-
-Science requires reproducibility. We provide the full suite:
-
-1.  **`download_data.py`**: Fetches the authenticated JSON text from Sefaria (Open Source Torah Database).
-2.  **`master_command_64.py`**: The extraction engine. Runs the Base-22 decoding algorithm.
-3.  **`arch_detective.py`**: Forensic analysis tool for Instruction Set Architecture (ISA) identification.
-4.  **`start_simulation.html` (formerly eternity_web)**: A browser-based forensic dashboard that visualizes the **Real-Time Memory Map** of the artifact.
-
-### 🔴 LIVE DASHBOARD
-**Access the active Genesis Protocol Simulation here:**
-[**https://consigcody94.github.io/genesis-protocol/**](https://consigcody94.github.io/genesis-protocol/)
-
-### Quick Start
-```bash
-# Clone the repository
-git clone https://github.com/codemonkey2024/genesis-protocol.git
-
-# Install dependencies (Standard Python 3)
-pip install -r requirements.txt
-
-# Run the Extractor
-python master_command_64.py
-
-# Launch the Dashboard
-open index.html
+```
+  (Aleph) = 0x00    (Bet) = 0x01    ...    (Tav) = 0x15
 ```
 
----
+All vowels, cantillation marks, and punctuation are stripped. Every consonant in the Masoretic canon &mdash; from Genesis 1:1 through II Chronicles &mdash; is transcoded into a contiguous binary stream.
 
-## 📜 The Implications
+**Encoding**: 13 Hebrew letters are packed per 64-bit word (22^13 < 2^64), producing a lossless, byte-aligned binary.
 
-If this hypothesis holds—that the Torah is a **carrier wave** for a **compiled program**—then the implications for Theology, Physics, and Computer Science are absolute.
+### Step 2 &mdash; Information-Theoretic Analysis
 
-We are not studying a book.
-**We are reverse-engineering the bootloader of the universe.**
+Shannon entropy measures information density on a scale of 0&ndash;8 bits/byte:
 
----
+| Data Type | Entropy (bits/byte) | Interpretation |
+|:--|:--:|:--|
+| English plaintext | ~4.2 | Low-density, redundant |
+| Hebrew plaintext | ~4.4 | Low-density, redundant |
+| **Genesis Protocol binary** | **7.4995** | **High-density, structured** |
+| Compressed archives (gzip) | 7.8&ndash;8.0 | Near-maximum density |
+| True random noise | 8.0 | Maximum entropy |
+| Compiled executables (ELF/PE) | 6.5&ndash;7.5 | High-density, structured |
 
-### 📬 Contact & Peer Review
-This is an open-source investigation. We invite cryptographers, linguists, and theologians to fork this repo, verify our hash functions, and contribute to the decoding effort.
+The artifact's entropy (7.4995) places it in the overlap zone between compiled code and compressed data &mdash; and well outside the range of any natural language.
 
-**Status**: `[CLASSIFIED]` -> `[PUBLIC]`
-**Maintainer**: The Genesis Protocol Team
+### Step 3 &mdash; Architecture Forensics
+
+The `arch_detective.py` tool analyzes byte-level alignment, opcode distribution, and instruction encoding patterns to identify potential instruction set architectures (ISAs) in the binary.
+
+### Step 4 &mdash; Execution
+
+A custom RISC-V emulator (`genesis_runner.py`) attempts to execute instruction blocks mined from the artifact, recording register states, memory operations, and control flow.
+
+<br/>
+
+## Findings
+
+### Finding I &mdash; Entropy Anomaly
+
+The extracted binary is **not** natural language entropy (4.4) and **not** random noise (8.0). It occupies a narrow band consistent with compiled, structured data. This is the foundational observation that motivates all subsequent analysis.
+
+### Finding II &mdash; Embedded Signatures
+
+Deep hex scanning (`deep_decoder.py`) identified ASCII-compatible signatures within the binary, including:
+
+- **IPv6** &mdash; A 128-bit addressing protocol formalized in 1998
+- **DNA**, **CODE**, **NETWORK** &mdash; Found in a statistically tight cluster (~150 bytes)
+
+> **Note**: The statistical significance of finding short ASCII strings in a 742 KB binary requires careful null-hypothesis testing. See [Open Questions](#open-questions).
+
+### Finding III &mdash; Cellular Automaton Behavior
+
+The first 8,192 bits of Genesis, used as a seed for a **Wolfram Rule 30** cellular automaton, produce a sustained, non-collapsing pattern with high visual complexity.
+
+### Finding IV &mdash; RISC-V Alignment
+
+The binary exhibits 32-bit alignment patterns and opcode distribution consistent with RISC-V instruction encoding. The `divine_disassembler.py` tool produces valid RISC-V assembly from extracted blocks.
+
+### Finding V &mdash; Execution Results
+
+The Genesis Runner emulator executed a mined instruction block:
+- Valid arithmetic operations performed
+- Register `x26` loaded value **11,843,461,120,000** (`0x2B0F8000`)
+- Control flow exhibited structured branching, not random jumps
+
+<br/>
+
+## Toolkit
+
+The complete analysis pipeline is open source and reproducible:
+
+| Tool | Purpose | Input | Output |
+|:--|:--|:--|:--|
+| `download_data.py` | Fetch Masoretic text from Sefaria | &mdash; | `data/*.json` |
+| `master_command_64.py` | Base-22 binary extraction | Hebrew text | `tanakh_full.bin` |
+| `arch_detective.py` | ISA forensics & alignment analysis | Binary | Architecture report |
+| `divine_disassembler.py` | RISC-V disassembly | Binary | `genesis.asm` |
+| `deep_decoder.py` | Pattern & signature scanning | Binary | Anomaly report |
+| `genesis_runner.py` | RISC-V emulation & execution | Assembly | Register states |
+| `eternity_vm.py` | Cellular automaton simulation | Binary seed | Grid evolution |
+| `entropy_lab.py` | Shannon entropy analysis | Binary | Entropy metrics |
+| `function_miner.py` | Code block extraction | Binary | Function boundaries |
+
+### Supporting Modules
+
+| Module | Purpose |
+|:--|:--|
+| `torah_loader.py` | Loads all 39 canonical books in order |
+| `text_processor.py` | Hebrew normalization (strip vowels, cantillation) |
+| `gematria.py` | Numerical value computation (Standard, Ordinal, Reduced) |
+| `els_search.py` | Equidistant Letter Sequence finder |
+| `ciphers.py` | Atbash & Albam cipher tools |
+| `main.py` | Interactive CLI workbench |
+
+<br/>
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/consigcody94/genesis-protocol.git
+cd genesis-protocol
+
+# Download the Masoretic text corpus (39 books from Sefaria)
+python download_data.py
+
+# Run the Base-22 extraction
+python master_command_64.py
+
+# Analyze the binary artifact
+python arch_detective.py
+python entropy_lab.py
+
+# Disassemble and execute
+python divine_disassembler.py
+python genesis_runner.py
+
+# Launch the live dashboard
+# Open index.html in any browser, or visit:
+# https://consigcody94.github.io/genesis-protocol/
+```
+
+**Requirements**: Python 3.8+ (standard library only &mdash; no external dependencies)
+
+<br/>
+
+## Live Dashboard
+
+The interactive forensic dashboard visualizes the binary artifact in real-time:
+
+- **Wolfram Rule 30** cellular automaton seeded with Genesis bits
+- **String stream** showing decoded ASCII patterns
+- **Entropy metrics** and artifact statistics
+- **Anomaly highlighting** for identified signatures
+
+**[Launch Dashboard](https://consigcody94.github.io/genesis-protocol/)**
+
+<br/>
+
+## Open Questions
+
+This project raises questions that require further investigation:
+
+| Question | Status | Approach Needed |
+|:--|:--|:--|
+| Is the entropy significant vs. control texts? | Untested | Compare English Bible, shuffled Torah, random Base-22 |
+| How many short ASCII strings appear by chance in 742 KB? | Untested | Monte Carlo simulation on random binaries of same size |
+| Does the RISC-V alignment exceed random expectation? | Partially tested | Statistical comparison against multiple ISA templates |
+| Are Rule 30 patterns from Genesis atypical? | Visual only | Quantitative complexity metrics against random seeds |
+| Does the extraction method (Base-22) bias toward code-like entropy? | Unknown | Test alternative base encodings (Base-20, Base-26, etc.) |
+
+Rigorous peer review from information theorists, computational linguists, and cryptographers is actively invited.
+
+<br/>
+
+## Repository Structure
+
+```
+genesis-protocol/
+  data/                     39 JSON books (Masoretic text from Sefaria)
+  tanakh_full.bin            742 KB binary artifact (extracted)
+  genesis.asm                RISC-V disassembly output
+  index.html                 Live forensic dashboard
+  genesis_data.js            Dashboard data layer
+  genesis_protocol_core.json Core metadata
+  master_command_64.py       Base-22 extraction engine
+  arch_detective.py          ISA forensics
+  divine_disassembler.py     RISC-V disassembler
+  genesis_runner.py          RISC-V emulator
+  deep_decoder.py            Pattern scanner
+  eternity_vm.py             Cellular automaton
+  entropy_lab.py             Entropy analysis
+  main.py                    Interactive CLI
+  torah_loader.py            Corpus loader
+  text_processor.py          Hebrew normalization
+  gematria.py                Numerical values
+  els_search.py              ELS finder
+  ciphers.py                 Atbash/Albam ciphers
+```
+
+<br/>
+
+## Citation
+
+If you use this toolkit or methodology in research:
+
+```
+@software{genesis_protocol,
+  title  = {The Genesis Protocol: Computational Archaeology of the Masoretic Text},
+  author = {Churchwell, Cody},
+  year   = {2025},
+  url    = {https://github.com/consigcody94/genesis-protocol}
+}
+```
+
+<br/>
+
+## License
+
+[MIT License](https://opensource.org/licenses/MIT) &mdash; Open source. Fork it, verify it, challenge it.
+
+<br/>
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:1a0a2e,50:2d0a4e,75:0a2d4e,100:0d1117&height=100&section=footer"/>
+
+<sub>
+An open-source investigation into the information-theoretic properties of ancient Hebrew text.<br/>
+Independent verification and rigorous critique are not just welcome &mdash; they are the point.
+</sub>
+
+</div>
