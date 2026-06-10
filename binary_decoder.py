@@ -8,6 +8,9 @@ class BinaryExtractor:
         # Mapping Aleph(0) to Tav(21)
         self.alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
         self.char_map = {char: i for i, char in enumerate(self.alphabet)}
+        # Fold final (sofit) forms into base letters so no consonant is dropped
+        for sofit, base in {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'}.items():
+            self.char_map[sofit] = self.char_map[base]
 
     def text_to_bits(self, text):
         """

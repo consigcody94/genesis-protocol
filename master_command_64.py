@@ -6,10 +6,14 @@ class MasterCommand64:
         self.loader = TorahLoader()
         self.alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
         self.char_map = {char: i for i, char in enumerate(self.alphabet)}
+        # Final (sofit) forms fold into their base letters so every consonant
+        # in the canon is encoded — without this, ~4% of letters are dropped.
+        for sofit, base in {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'}.items():
+            self.char_map[sofit] = self.char_map[base]
 
     def process_block(self, chunk):
         """
-        Processes a block of 13-14 Hebrew letters.
+        Processes a block of up to 13 Hebrew letters.
         13 letters * log2(22) = 58 bits. Fits safely in 64-bit Int.
         """
         val = 0
