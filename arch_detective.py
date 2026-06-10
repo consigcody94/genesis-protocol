@@ -1,6 +1,7 @@
 import os
 import collections
-import math
+
+from analysis_utils import shannon_entropy
 
 class ArchitectureDetective:
     def __init__(self):
@@ -33,14 +34,14 @@ class ArchitectureDetective:
         if best_align == entropy_16: arch_width = "16-bit"
         if best_align == entropy_32: arch_width = "32-bit"
         if best_align == entropy_64: arch_width = "64-bit"
-        
+
         print(f"   -> Likely Instruction Width: {arch_width}")
 
         # 2. Opcode Histogram (First byte of instruction)
         # In a real ISA, some opcodes (MOV, ADD, JMP) are VERY frequent.
         # Random data implies flat distribution.
-        
-        step = 4 if arch_width == "32-bit" else 2
+
+        step = {"16-bit": 2, "32-bit": 4, "64-bit": 8}.get(arch_width, 4)
         opcodes = [data[i] for i in range(0, len(data), step)]
         
         counts = collections.Counter(opcodes)
@@ -84,18 +85,10 @@ class ArchitectureDetective:
              print("Structure: High-Density Compressed Data Stream")
 
     def measure_alignment(self, data, width):
-        # Sample chunks
-        chunks = [data[i:i+width] for i in range(0, len(data)-width, width)]
-        # Measure uniqueness ratio? Or entropy of columns?
-        # Let's measure entropy of the FIRST byte of each chunk (simulating opcode entropy)
-        opcodes = [c[0] for c in chunks]
-        counts = collections.Counter(opcodes)
-        entropy = 0
-        total = len(opcodes)
-        for count in counts.values():
-            p = count / total
-            entropy -= p * math.log2(p)
-        return entropy
+        # Entropy of the FIRST byte of each fixed-width chunk
+        # (simulating opcode entropy; lower = more structured)
+        opcodes = [data[i] for i in range(0, len(data) - width, width)]
+        return shannon_entropy(opcodes)
 
 if __name__ == "__main__":
     ad = ArchitectureDetective()

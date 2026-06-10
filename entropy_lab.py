@@ -1,59 +1,51 @@
 import math
-import collections
-import random
 import os
-from text_processor import TextProcessor
+import random
+
+from analysis_utils import shannon_entropy
+from hebrew import ALPHABET
+from torah_loader import TorahLoader
 
 class EntropyLab:
     def __init__(self):
-        self.tp = TextProcessor()
-        self.hebrew_alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
+        self.loader = TorahLoader()
 
-    def calculate_shannon_entropy(self, text):
-        """Calculates Shannon Entropy in bits per symbol."""
-        if not text:
-            return 0
-        freqs = collections.Counter(text)
-        total_len = len(text)
-        entropy = 0
-        for count in freqs.values():
-            p = count / total_len
-            entropy -= p * math.log2(p)
-        return entropy
-
-    def generate_control_text(self, length):
+    def generate_control_text(self, length, rng=None):
         """Generates a random string of Hebrew letters of given length."""
-        return "".join(random.choice(self.hebrew_alphabet) for _ in range(length))
+        rng = rng or random
+        return "".join(rng.choice(ALPHABET) for _ in range(length))
 
     def run_experiment(self):
-        # Load Genesis
-        path = os.path.join("data", "torah_text.txt")
-        if not os.path.exists(path):
-            print("Error: content file needed.")
+        # 1. Letter-level entropy of the full canon
+        torah_text = self.loader.load_full_torah()
+        if not torah_text:
+            print("Error: corpus not found. Run download_data.py first.")
             return
 
-        raw_text = self.tp.load_file(path)
-        torah_text = self.tp.normalize(raw_text)
-        
-        # 1. Shannon Entropy
-        torah_entropy = self.calculate_shannon_entropy(torah_text)
-        print(f"Torah Text Length: {len(torah_text)} letters")
-        print(f"Torah Shannon Entropy: {torah_entropy:.4f} bits/symbol")
-        
-        # 2. Control Group (Random Noise)
-        control_text = self.generate_control_text(len(torah_text))
-        control_entropy = self.calculate_shannon_entropy(control_text)
+        torah_entropy = shannon_entropy(torah_text)
+        print(f"\nTorah Text Length: {len(torah_text)} letters")
+        print(f"Torah Letter Entropy: {torah_entropy:.4f} bits/symbol")
+
+        # 2. Control Group (Random Noise), seeded for reproducibility
+        control_text = self.generate_control_text(len(torah_text), random.Random(22))
+        control_entropy = shannon_entropy(control_text)
         print(f"Random Control Entropy: {control_entropy:.4f} bits/symbol")
-        
-        # Analysis
-        # Max entropy for 22 chars = log2(22) ≈ 4.459
-        max_entropy = math.log2(22)
-        print(f"Theoretical Max Entropy (22 chars): {max_entropy:.4f}")
-        
+
+        # Max entropy for 22 symbols = log2(22) ≈ 4.459
+        max_entropy = math.log2(len(ALPHABET))
+        print(f"Theoretical Max Entropy ({len(ALPHABET)} symbols): {max_entropy:.4f}")
+
         diff = control_entropy - torah_entropy
-        print(f"\nDiscovery Note: Torah is {diff:.4f} bits 'less random' than pure noise.")
-        print("Interpretation: This indicates structural 'redundancy' or 'grammar', which is expected in language.")
-        # But maybe we can frame it as "Compression Potential".
+        print(f"\nNote: Torah letters carry {diff:.4f} bits less than pure noise -")
+        print("the redundancy ('grammar') expected of any natural language.")
+
+        # 3. Byte-level entropy of the packed artifact, if present
+        if os.path.exists("tanakh_full.bin"):
+            with open("tanakh_full.bin", 'rb') as f:
+                data = f.read()
+            print(f"\nPacked Artifact Entropy: {shannon_entropy(data):.4f} bits/byte")
+            print("(See null_hypothesis.py: this value is a property of the Base-22")
+            print(" packing - shuffled text packs to the same entropy.)")
 
 if __name__ == "__main__":
     lab = EntropyLab()

@@ -24,16 +24,14 @@ Everything is stdlib-only and seeded, so results are reproducible:
 """
 
 import argparse
-import collections
-import math
 import random
 import struct
 import os
 
+from analysis_utils import shannon_entropy, extract_ascii_strings
+from hebrew import ALPHABET, SOFIT_MAP, build_char_map
 from torah_loader import TorahLoader
 
-ALPHABET = "אבגדהוזחטיכלמנסעפצקרשת"
-SOFIT_MAP = {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'}
 BLOCK_SIZE = 13  # 22^13 < 2^64
 SEED = 22
 
@@ -44,24 +42,9 @@ KEYWORDS = ["DNA", "RNA", "CODE", "NETWORK", "IPV6", "AI", "KEY", "ROOT",
 RISCV_OPCODES = {0x37, 0x17, 0x6F, 0x67, 0x63, 0x03, 0x23, 0x13, 0x33, 0x0F, 0x73}
 
 
-def shannon_entropy(data):
-    """Shannon entropy in bits per byte."""
-    if not data:
-        return 0.0
-    counts = collections.Counter(data)
-    total = len(data)
-    entropy = 0.0
-    for count in counts.values():
-        p = count / total
-        entropy -= p * math.log2(p)
-    return entropy
-
-
 def letters_to_digits(text):
     """Map a Hebrew letter stream to Base-22 digits (finals folded)."""
-    char_map = {char: i for i, char in enumerate(ALPHABET)}
-    for sofit, base in SOFIT_MAP.items():
-        char_map[sofit] = char_map[base]
+    char_map = build_char_map()
     return [char_map[c] for c in text if c in char_map]
 
 
@@ -74,22 +57,6 @@ def pack_base22(digits):
             val = val * 22 + d
         out.extend(struct.pack('>Q', val))
     return bytes(out)
-
-
-def extract_ascii_strings(data, min_len=3):
-    """Same extraction rule as deep_decoder.py."""
-    strings = []
-    cur = []
-    for byte in data:
-        if 32 <= byte <= 126:
-            cur.append(chr(byte))
-        else:
-            if len(cur) >= min_len:
-                strings.append("".join(cur))
-            cur = []
-    if len(cur) >= min_len:
-        strings.append("".join(cur))
-    return strings
 
 
 def keyword_hits(data):

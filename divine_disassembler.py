@@ -26,10 +26,8 @@ class DivineDisassembler:
         ]
 
     def decode_instruction(self, word):
-        # RISC-V instructions are 32-bit (little endian normally, but we used big endian for extraction? Let's check).
-        # Actually our master_command used big-endian for byte writing? No, typically standard python write.
-        # Let's assume standard 32-bit structure.
-        
+        # RISC-V instructions are 32-bit, read little-endian per convention
+        # (the artifact itself is packed as big-endian 64-bit words).
         opcode = word & 0x7F
         rd = (word >> 7) & 0x1F
         funct3 = (word >> 12) & 0x7
@@ -48,10 +46,16 @@ class DivineDisassembler:
         
         if name == "UNKNOWN":
             return f"DATA    0x{word:08X}"
-            
-        if name in ["OP", "OP-IMM"]:
-            # R-Type or I-Type usually: ADD rd, rs1, rs2
+
+        if name == "OP":
+            # R-Type: ADD rd, rs1, rs2
             asm += f"{rd_name}, {rs1_name}, {rs2_name}"
+
+        elif name == "OP-IMM":
+            # I-Type: ADDI rd, rs1, imm (sign-extended 12-bit)
+            imm = word >> 20
+            if imm & 0x800: imm -= 0x1000
+            asm += f"{rd_name}, {rs1_name}, {imm}"
             
         elif name == "LUI" or name == "AUIPC":
             # U-Type: LUI rd, imm

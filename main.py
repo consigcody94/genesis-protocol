@@ -1,5 +1,5 @@
-import sys
 import os
+from analysis_utils import ensure_utf8_stdout
 from text_processor import TextProcessor
 from gematria import GematriaEngine
 from els_search import BibleCodeScanner
@@ -71,24 +71,18 @@ class TorahWorkbenchApp:
         max_dist = int(max_dist) if max_dist.isdigit() else 50
         
         print(f"Searching for '{term}' with max skip {max_dist}...")
+        # Forward and backward skips in two passes
         results = list(self.els_scanner.search(self.flat_text, term, 1, max_dist))
-        # Also search negative skips (backward)
-        # results += list(self.els_scanner.search(self.flat_text, term, -max_dist, -1))
-        # Range in python for negative: range(-1, -max_dist -1, -1)
-        # My scanner takes explicit min/max ranges.
-        # Let's just do a second pass for negative to be simple or pass range explicitly if scanner supports it.
-        # The scanner uses range(min, max+1). 
-        # So for negative: min=-50, max=-1.
-        
-        results_neg = list(self.els_scanner.search(self.flat_text, term, -max_dist, -1))
-        all_results = results + results_neg
-        
-        if not all_results:
+        results += list(self.els_scanner.search(self.flat_text, term, -max_dist, -1))
+
+        if not results:
             print("No sequences found.")
         else:
-            print(f"Found {len(all_results)} occurrences.")
-            for r in all_results: # Show first 10
+            print(f"Found {len(results)} occurrences.")
+            for r in results[:10]:
                 print(f"Match: Start={r['start_index']}, Skip={r['skip']}")
+            if len(results) > 10:
+                print(f"... and {len(results) - 10} more.")
 
     def mode_cipher(self):
         text = input("Enter text to encipher: ")
@@ -100,5 +94,6 @@ class TorahWorkbenchApp:
         print(f"Albam:    {albam}")
 
 if __name__ == "__main__":
+    ensure_utf8_stdout()
     app = TorahWorkbenchApp()
     app.run()

@@ -1,7 +1,7 @@
 import json
 import os
-import math
-import binascii
+
+from analysis_utils import shannon_entropy
 
 class CoreConstructor:
     def __init__(self):
@@ -37,14 +37,8 @@ class CoreConstructor:
             # Recalculate Entropy
             with open(bin_path, 'rb') as f:
                 data = f.read()
-                
-            from collections import Counter
-            counts = Counter(data)
-            entropy = 0
-            for count in counts.values():
-                p = count / len(data)
-                entropy -= p * math.log2(p)
-            core_data["metrics"]["global_entropy"] = round(entropy, 5)
+
+            core_data["metrics"]["global_entropy"] = round(shannon_entropy(data), 5)
             
             # Header
             core_data["structure"]["header_hex"] = data[:8].hex()

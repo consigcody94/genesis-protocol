@@ -1,6 +1,8 @@
+import math
 import os
 import zlib
-import struct
+
+from analysis_utils import extract_ascii_strings
 
 class DecoderLab:
     def __init__(self):
@@ -36,17 +38,8 @@ class DecoderLab:
             print("   No standard file signature detected. (Unknown Format)")
 
         # 2. String Extraction
-        print("\n[2] Extracting Strings (ASCII > 4 chars)...")
-        found_strings = []
-        current_str = ""
-        for byte in data:
-            if 32 <= byte <= 126: # Printable ASCII
-                current_str += chr(byte)
-            else:
-                if len(current_str) >= 4:
-                    found_strings.append(current_str)
-                current_str = ""
-        
+        print("\n[2] Extracting Strings (ASCII >= 4 chars)...")
+        found_strings = extract_ascii_strings(data, min_len=4)
         print(f"   Found {len(found_strings)} strings.")
         if found_strings:
             print(f"   Top 10: {found_strings[:10]}")
@@ -67,7 +60,6 @@ class DecoderLab:
         # 4. Visual Rendering (The "Grid" View)
         # Convert binary data to a grayscale image (PGM format)
         # Width ~ Square root of size
-        import math
         size = len(data)
         width = int(math.sqrt(size))
         height = size // width

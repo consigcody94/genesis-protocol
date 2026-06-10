@@ -1,4 +1,3 @@
-import zlib
 from gematria import GematriaEngine
 
 class TorahHashLab:
@@ -21,7 +20,6 @@ class TorahHashLab:
         - Add a 'skip' factor (ELS influence).
         """
         hash_val = 0
-        skip = 0
         # English Gematria mapping (a=1, b=2... z=26)
         # But heavily weighted by position (like base-27)
         

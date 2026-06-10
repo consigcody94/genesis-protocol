@@ -1,16 +1,14 @@
-import os
 import binascii
+
+from analysis_utils import shannon_entropy
+from hebrew import build_char_map
 from text_processor import TextProcessor
 
 class BinaryExtractor:
     def __init__(self):
         self.tp = TextProcessor()
-        # Mapping Aleph(0) to Tav(21)
-        self.alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
-        self.char_map = {char: i for i, char in enumerate(self.alphabet)}
-        # Fold final (sofit) forms into base letters so no consonant is dropped
-        for sofit, base in {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'}.items():
-            self.char_map[sofit] = self.char_map[base]
+        # Mapping Aleph(0) to Tav(21), finals folded
+        self.char_map = build_char_map()
 
     def text_to_bits(self, text):
         """
@@ -39,16 +37,7 @@ class BinaryExtractor:
 
     def analyze_entropy(self, data):
         """Check if the extracted binary looks like code or noise."""
-        if not data: return 0
-        import math
-        from collections import Counter
-        counts = Counter(data)
-        entropy = 0
-        total = len(data)
-        for count in counts.values():
-            p = count / total
-            entropy -= p * math.log2(p)
-        return entropy
+        return shannon_entropy(data)
 
     def run(self):
         print("Initiating MASTER COMMAND Protocol: Binary Extraction...")

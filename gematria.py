@@ -1,8 +1,10 @@
+from hebrew import ALPHABET, SOFIT_MAP
+
 class GematriaEngine:
     def __init__(self):
         # Standard Gematria values (Mispar Ragil)
         self.values = {
-            'א': 1, 'b': 0, # Placeholder/Typo safety
+            'א': 1,
             'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
             'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
             'ס': 60, 'ע': 70, 'פ': 80, 'ף': 80, 'צ': 90, 'ץ': 90, 'ק': 100,
@@ -10,18 +12,12 @@ class GematriaEngine:
         }
         
         # Ordinal values (Mispar Siduri) 1-22
-        # Building it dynamically or statically, let's do static for clarity
+        # Final (sofit) forms take the same ordinal as their base letter.
         self.ordinal_values = {}
-        alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
-        for i, char in enumerate(alphabet, 1):
+        for i, char in enumerate(ALPHABET, 1):
             self.ordinal_values[char] = i
-        # Map sophit forms to same ordinal often, or extend. 
-        # Standard usage often maps sophit to same as regular.
-        # Let's map suffix forms to their regular counterparts for ordinal.
-        sophit_map = {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'}
-        for s, r in sophit_map.items():
-            if r in self.ordinal_values:
-                self.ordinal_values[s] = self.ordinal_values[r]
+        for s, r in SOFIT_MAP.items():
+            self.ordinal_values[s] = self.ordinal_values[r]
 
     def calculate(self, text, method="standard"):
         """

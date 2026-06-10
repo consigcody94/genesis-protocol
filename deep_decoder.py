@@ -1,6 +1,8 @@
 import re
 import os
 
+from analysis_utils import extract_ascii_strings
+
 class DeepDecoder:
     def __init__(self):
         self.filename = "tanakh_full.bin"
@@ -57,15 +59,8 @@ class DeepDecoder:
         ]
 
         # Extract all ASCII strings first for speed
-        ascii_strings = []
-        cur = ""
-        for byte in data:
-            if 32 <= byte <= 126:
-                cur += chr(byte)
-            else:
-                if len(cur) >= 3: # allow short 3-letter words like DNA
-                    ascii_strings.append(cur)
-                cur = ""
+        # (min length 3 to allow short words like DNA)
+        ascii_strings = extract_ascii_strings(data, min_len=3)
 
         # Search strings
         found_map = {}

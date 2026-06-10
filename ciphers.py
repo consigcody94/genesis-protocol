@@ -1,6 +1,8 @@
+from hebrew import ALPHABET
+
 class CipherEngine:
     def __init__(self):
-        self.alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
+        self.alphabet = ALPHABET
         # Standard Atbash Map
         # First maps to Last
         self.atbash_map = {}
