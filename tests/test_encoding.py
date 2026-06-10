@@ -1,6 +1,8 @@
 import struct
 import unittest
 
+from divine_disassembler import DivineDisassembler
+from hebrew import build_char_map
 from master_command_64 import MasterCommand64
 from null_hypothesis import (letters_to_digits, pack_base22, shannon_entropy,
                              extract_ascii_strings, riscv_valid_ratio,
@@ -48,6 +50,28 @@ class TestBase22Encoding(unittest.TestCase):
     def test_letters_to_digits_folds_finals(self):
         base_idx = ALPHABET.index('צ')
         self.assertEqual(letters_to_digits("ץ"), [base_idx])
+
+
+class TestHebrewModule(unittest.TestCase):
+    def test_build_char_map_is_canonical(self):
+        char_map = build_char_map()
+        self.assertEqual(len(char_map), 27)
+        self.assertEqual(sorted(set(char_map.values())), list(range(22)))
+
+
+class TestDisassembler(unittest.TestCase):
+    def test_op_imm_decodes_signed_immediate(self):
+        dd = DivineDisassembler()
+        # ADDI ra, zero, 5
+        word = (5 << 20) | (1 << 7) | 0x13
+        self.assertIn("ra, zero, 5", dd.decode_instruction(word))
+        # ADDI ra, zero, -5 (12-bit two's complement)
+        word = (0xFFB << 20) | (1 << 7) | 0x13
+        self.assertIn("ra, zero, -5", dd.decode_instruction(word))
+
+    def test_unknown_opcode_is_data(self):
+        dd = DivineDisassembler()
+        self.assertTrue(dd.decode_instruction(0x7F).startswith("DATA"))
 
 
 class TestAnalysisHelpers(unittest.TestCase):

@@ -132,12 +132,17 @@ The complete analysis pipeline is open source and reproducible:
 
 | Module | Purpose |
 |:--|:--|
+| `hebrew.py` | Shared alphabet constants & Base-22 digit map (single source of truth) |
+| `analysis_utils.py` | Shared Shannon entropy & ASCII string extraction |
 | `torah_loader.py` | Loads all 39 canonical books in order |
 | `text_processor.py` | Hebrew normalization (strip vowels, cantillation) |
 | `gematria.py` | Numerical value computation (Standard, Ordinal, Reduced) |
 | `els_search.py` | Equidistant Letter Sequence finder |
+| `future_scan.py` | ELS keyword scan of Genesis 1 with shuffled-text control |
 | `ciphers.py` | Atbash & Albam cipher tools |
 | `main.py` | Interactive CLI workbench |
+
+All binary artifacts are reproducible: `python master_command_64.py` rebuilds `tanakh_full.bin` (full canon) and `python master_command_64.py --torah-only -o the_hidden_book.bin` rebuilds the Five-Books artifact used by the cellular automaton tools.
 
 <br/>
 
@@ -200,6 +205,7 @@ Status after the v1.1 control experiments (`python null_hypothesis.py`, seeded a
 | How many short ASCII strings appear by chance in 742 KB? | **Tested** | Real keyword hits fall within Monte Carlo control ranges |
 | Does the RISC-V alignment exceed random expectation? | **Tested** | It exceeds *random bytes* but matches *shuffled Torah* &mdash; an encoding artifact |
 | Does the extraction method (Base-22) bias toward code-like entropy? | **Confirmed** | Yes &mdash; 13 digits fill only ~58 of 64 bits, capping any packed text below 8.0 |
+| Do ELS keyword "clusters" (DNA/CODE/NETWORK) exceed chance? | **Tested** | No &mdash; shuffled Genesis 1 yields comparable hits and *more* clusters (48 vs 29); see `future_scan.py` |
 | Are Rule 30 patterns from Genesis atypical? | Visual only | Still open &mdash; needs quantitative complexity metrics against random seeds |
 
 Rigorous peer review from information theorists, computational linguists, and cryptographers is actively invited &mdash; the controls above are a starting point, not the final word.
@@ -213,8 +219,11 @@ genesis-protocol/
   data/                     39 JSON books (Masoretic text from Sefaria)
   tests/                     Unit & regression tests (unittest)
   .github/workflows/ci.yml   CI: tests + full pipeline smoke run
-  tanakh_full.bin            742 KB binary artifact (extracted)
+  tanakh_full.bin            742 KB binary artifact (full canon)
+  the_hidden_book.bin        184 KB binary artifact (Five Books only)
   genesis.asm                RISC-V disassembly output
+  hebrew.py                  Shared alphabet constants
+  analysis_utils.py          Shared entropy/string helpers
   null_hypothesis.py         Control experiments (the science)
   null_hypothesis_report.txt Latest control-run report
   index.html                 Live forensic dashboard

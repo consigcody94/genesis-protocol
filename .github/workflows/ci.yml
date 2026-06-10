@@ -29,4 +29,5 @@ jobs:
           python divine_disassembler.py
           python function_miner.py
           python genesis_runner.py
+          python future_scan.py
           python null_hypothesis.py --trials 2
