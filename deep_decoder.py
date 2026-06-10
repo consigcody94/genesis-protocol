@@ -1,6 +1,5 @@
 import re
 import os
-import math
 
 class DeepDecoder:
     def __init__(self):
@@ -15,12 +14,17 @@ class DeepDecoder:
         with open(self.filename, 'rb') as f:
             data = f.read()
 
-        print(f"Loaded Grand Artifact: {len(data)} bytes")
-        
+        # Single pass: every line goes to stdout AND the report file.
+        report = []
+        def emit(line):
+            print(line)
+            report.append(line)
+
+        emit(f"Loaded Grand Artifact: {len(data)} bytes")
+
         # 1. Regex Hunting
-        print("\n[1] Scanning for Patterns (Regex)...")
-        
-        # Regex Patterns
+        emit("\n[1] Scanning for Patterns (Regex)...")
+
         patterns = {
             "IPv4": rb'\b(?:\d{1,3}\.){3}\d{1,3}\b', # e.g. 192.168.1.1
             "IPv6": rb'([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}', # Full IPv6 (simple)
@@ -28,20 +32,18 @@ class DeepDecoder:
             "URL": rb'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+',
             "Year": rb'\b(19|20)\d{2}\b' # 1900-2099
         }
-        
+
         for name, pat in patterns.items():
             matches = re.findall(pat, data)
             if matches:
-                 # Deduplicate and decode
+                # Deduplicate and decode
                 unique = set(matches)
-                print(f"   [!] Found {len(unique)} {name} candidates:")
+                emit(f"   [!] Found {len(unique)} {name} candidates:")
                 for m in list(unique)[:5]:
-                    try:
-                        print(f"       -> {m.decode('ascii', errors='ignore')}")
-                    except: pass
+                    emit(f"       -> {m.decode('ascii', errors='ignore')}")
 
         # 2. Keyword Dictionary Scan
-        print("\n[2] Scanning for Modern Keywords...")
+        emit("\n[2] Scanning for Modern Keywords...")
         keywords = [
             # Tech
             "HTTP", "HTML", "JSON", "XML", "SSH", "FTP", "ROOT", "ADMIN", "SYSTEM", "KERNEL", "BOOT", "SHELL", "SUDO",
@@ -53,7 +55,7 @@ class DeepDecoder:
             # History/Prophecy
             "ISRAEL", "ZION", "JERUSALEM", "TEMPLE", "MESSIAH", "GOG", "MAGOG", "ARMAGEDDON"
         ]
-        
+
         # Extract all ASCII strings first for speed
         ascii_strings = []
         cur = ""
@@ -64,7 +66,7 @@ class DeepDecoder:
                 if len(cur) >= 3: # allow short 3-letter words like DNA
                     ascii_strings.append(cur)
                 cur = ""
-        
+
         # Search strings
         found_map = {}
         for s in ascii_strings:
@@ -75,49 +77,19 @@ class DeepDecoder:
                     found_map[k] += 1
                     # Print context if rare
                     if found_map[k] <= 3:
-                        print(f"   [!] MATCH: '{k}' found in string: '{s}'")
+                        emit(f"   [!] MATCH: '{k}' found in string: '{s}'")
 
-        # 3. File Entopy & Header
+        # 3. File Entropy & Header
         head = data[:8].hex()
-        print(f"\n[3] Header Analysis: {head}")
-        if "504b0304" in head: print("   -> PK Header (ZIP) Detected!")
-        
+        emit(f"\n[3] Header Analysis: {head}")
+        if "504b0304" in head: emit("   -> PK Header (ZIP) Detected!")
+
         # 4. Save Strings
         with open("tanakh_strings.txt", "w", encoding="utf-8") as f:
             f.write("\n".join(ascii_strings))
         print(f"\n[4] All {len(ascii_strings)} extracted strings saved to 'tanakh_strings.txt'.")
 
         # 5. Save Report to File
-        report = []
-        report.append(f"Loaded Grand Artifact: {len(data)} bytes")
-        report.append(f"\n[1] Scanning for Patterns (Regex)...")
-        # Reuse the logic but capture to list
-        for name, pat in patterns.items():
-            matches = re.findall(pat, data)
-            if matches:
-                unique = set(matches)
-                report.append(f"   [!] Found {len(unique)} {name} candidates:")
-                for m in list(unique)[:5]:
-                    try:
-                        report.append(f"       -> {m.decode('ascii', errors='ignore')}")
-                    except: pass
-
-        report.append(f"\n[2] Scanning for Modern Keywords...")
-        # ... logic reused ...
-        # Search strings
-        found_map = {}
-        for s in ascii_strings:
-            upper_s = s.upper()
-            for k in keywords:
-                if k in upper_s:
-                    if k not in found_map: found_map[k] = 0
-                    found_map[k] += 1
-                    if found_map[k] <= 3:
-                        report.append(f"   [!] MATCH: '{k}' found in string: '{s}'")
-        
-        report.append(f"\n[3] Header Analysis: {head}")
-        if "504b0304" in head: report.append("   -> PK Header (ZIP) Detected!")
-        
         with open("deep_scan_clean.txt", "w", encoding="utf-8") as f:
             f.write("\n".join(report))
         print("Report saved to deep_scan_clean.txt")

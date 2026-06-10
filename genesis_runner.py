@@ -20,20 +20,17 @@ class GenesisRunner:
         self.instructions = []
         try:
             with open(filename, "r") as f:
-                lines = f.readlines()
-                for line in lines:
+                for line in f:
                     parts = line.strip().split(',')
                     if len(parts) == 2:
-                        offset, hexval = parts
-                        # Little endian parse
-                        val = int(hexval, 16)
-                        # Re-pack to bytes to unpack correctly (lazy way to get int)
+                        _offset, hexval = parts
+                        # The miner stores raw little-endian bytes as hex
                         b = bytes.fromhex(hexval)
                         val = struct.unpack('<I', b)[0]
                         self.instructions.append(val)
             print(f"Loaded {len(self.instructions)} instructions into memory.")
-        except:
-            print("Failed to load program.")
+        except (OSError, ValueError, struct.error) as e:
+            print(f"Failed to load program: {e}")
 
     def run(self):
         print("\n=== EXECUTING GENESIS PROTOCOL ===")
@@ -60,7 +57,7 @@ class GenesisRunner:
         imm_i = (word >> 20)
         
         # Opcode Dispatch
-        handler = list(self.opcodes.values())[list(self.opcodes.keys()).index(self.get_opcode_name(opcode))]
+        handler = self.opcodes.get(self.get_opcode_name(opcode))
         if handler:
             handler(word, rd, rs1, rs2, imm_i, funct3)
         else:

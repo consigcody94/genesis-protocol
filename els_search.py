@@ -46,23 +46,18 @@ class BibleCodeScanner:
                 # End point for slice is tricky because it's exclusive.
                 # start + (term_len * d) is mostly right but needs care for negative d.
                 
-                try:
-                    # Construct candidate manually to be safe or use slice
-                    # Slice method:
-                    # needed_len = term_len
-                    # end_index = n + (d * needed_len)
-                    
-                    # Python slice is forgiving if it goes out of bounds, it just stops.
-                    # We need EXACT length match.
-                    
-                    candidate = text[n : n + (d * term_len) : d]
-                    
-                    if len(candidate) == term_len:
-                        if candidate == term:
-                            yield {
-                                'term': term,
-                                'start_index': n,
-                                'skip': d
-                            }
-                except Exception:
-                    continue
+                # Python slice is forgiving if it goes out of bounds, it just stops.
+                # We need EXACT length match.
+                # Careful with negative skips: a negative end index would wrap
+                # around to the end of the string, so clamp it to None.
+                end = n + (d * term_len)
+                if d < 0 and end < 0:
+                    end = None
+                candidate = text[n : end : d]
+
+                if len(candidate) == term_len and candidate == term:
+                    yield {
+                        'term': term,
+                        'start_index': n,
+                        'skip': d
+                    }
