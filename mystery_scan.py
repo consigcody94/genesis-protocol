@@ -1,4 +1,4 @@
-import collections
+from analysis_utils import ensure_utf8_stdout
 from els_search import BibleCodeScanner
 from text_processor import TextProcessor
 from gematria import GematriaEngine
@@ -77,5 +77,6 @@ class MysteryScan:
             f.write(final_output)
 
 if __name__ == "__main__":
+    ensure_utf8_stdout()
     scan = MysteryScan()
     scan.run()
