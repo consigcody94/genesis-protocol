@@ -1,0 +1,40 @@
+NULL HYPOTHESIS LAB
+============================================================
+
+Real artifact: 742344 bytes from 1206309 letters
+Monte Carlo trials per control: 5 (seed=22)
+
+[1] SHANNON ENTROPY (bits/byte)
+    Real Tanakh artifact:        7.7167
+    Control A (shuffled Torah):  7.7169  (min 7.7165 / max 7.7174)
+    Control B (uniform Base-22): 7.7285  (min 7.7281 / max 7.7291)
+    Control C (random bytes):    7.9997  (min 7.9997 / max 7.9998)
+    Note: 13 Base-22 digits occupy ~58.1 of each word's 64 bits,
+    so the first byte of every 8-byte block only takes values 0-4.
+    That alone caps the entropy of ANY Base-22-packed text below 8.0.
+
+[2] ASCII KEYWORD HITS (real vs shuffled-Torah controls)
+    Keyword      Real   Control mean    Control range
+    DNA             0            0.0              0-0
+    RNA             1            0.0              0-0
+    CODE            0            0.0              0-0
+    NETWORK         0            0.0              0-0
+    IPV6            1            0.0              0-0
+    AI             13           21.0            13-29
+    KEY             0            0.2              0-1
+    ROOT            0            0.0              0-0
+    HASH            0            0.0              0-0
+    USER            0            0.0              0-0
+    SSH             1            0.0              0-0
+    GENE            0            0.0              0-0
+
+[3] RISC-V VALID-OPCODE RATIO (32-bit LE words, low 7 bits)
+    Chance expectation (11 opcodes / 128): 0.0859
+    Real Tanakh artifact:                  0.1381
+    Control A (shuffled Torah):            0.1361
+    Control C (random bytes):              0.0854
+
+[VERDICT]
+    Any signal unique to the Tanakh should separate 'Real' from
+    Control A (same letters, no meaning). Metrics that match the
+    controls are properties of the Base-22 ENCODING, not the text.
