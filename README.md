@@ -9,7 +9,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/consigcody94/genesis-protocol/ci.yml?style=flat-square&label=CI)](https://github.com/consigcody94/genesis-protocol/actions)
 [![Entropy](https://img.shields.io/badge/Shannon_Entropy-7.7167_bits/byte-22c55e?style=flat-square)]()
 [![Artifact](https://img.shields.io/badge/Binary_Artifact-742_KB-0891b2?style=flat-square)]()
-[![Dashboard](https://img.shields.io/badge/Live_Dashboard-ACTIVE-f59e0b?style=flat-square)](https://consigcody94.github.io/genesis-protocol/)
+[![Dashboard](https://img.shields.io/badge/Live_Dashboard-ACTIVE-f59e0b?style=flat-square)](https://luther-paper-oriented-guide.trycloudflare.com)
 
 <br/>
 
@@ -20,7 +20,7 @@ with entropy indistinguishable from high-density executables.
 
 <br/>
 
-[Live Dashboard](https://consigcody94.github.io/genesis-protocol/) &ensp;&bull;&ensp; [Methodology](#methodology) &ensp;&bull;&ensp; [Findings](#findings) &ensp;&bull;&ensp; [Toolkit](#toolkit) &ensp;&bull;&ensp; [Quick Start](#quick-start)
+[Live Dashboard](https://luther-paper-oriented-guide.trycloudflare.com) &ensp;&bull;&ensp; [Methodology](#methodology) &ensp;&bull;&ensp; [Findings](#findings) &ensp;&bull;&ensp; [Toolkit](#toolkit) &ensp;&bull;&ensp; [Quick Start](#quick-start)
 
 </div>
 
@@ -175,7 +175,8 @@ python -m unittest discover -s tests -t .
 
 # Launch the live dashboard
 # Open index.html in any browser, or visit:
-# https://consigcody94.github.io/genesis-protocol/
+# https://luther-paper-oriented-guide.trycloudflare.com
+# (mirror: https://consigcody94.github.io/genesis-protocol/)
 ```
 
 **Requirements**: Python 3.9+ (standard library only &mdash; no external dependencies)
@@ -191,7 +192,9 @@ The interactive forensic dashboard visualizes the binary artifact in real-time:
 - **Entropy metrics** and artifact statistics
 - **Anomaly highlighting** for identified signatures
 
-**[Launch Dashboard](https://consigcody94.github.io/genesis-protocol/)**
+**[Launch Dashboard](https://luther-paper-oriented-guide.trycloudflare.com)** &mdash; self-hosted, auto-syncs from this repo every 15 minutes.
+
+> The self-hosted URL is a Cloudflare quick tunnel and may rotate after a server restart. Stable mirror: **[GitHub Pages](https://consigcody94.github.io/genesis-protocol/)**.
 
 <br/>
 
